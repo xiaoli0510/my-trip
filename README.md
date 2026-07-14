@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 本周总目标（Mini 携程）
+做出这些页面就够练一轮：
 
-## Getting Started
+首页：搜索框（目的地 / 日期）+ 金刚区入口
+目的地 / 酒店列表
+酒店详情（图、价格、设施、下单入口）
+订单确认（假下单）
+我的行程（可顺手塞你汕头潮州 3 天）
+底部 Tab（首页 / 行程 / 我的）
+技术主线：App Router、布局、动态路由、Server/Client 组件、searchParams、Route Handler、基础状态。
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#  逐日进度
+周二 7/14 · 搭骨架（5h）
+上午
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+跑通项目，看清 app/ 目录
+定信息架构：路由表写在纸上/备忘录
+建基础布局：layout、全局样式、颜色变量（携程蓝可简化）
+下午
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+首页静态版：顶栏 + 搜索区占位 + 金刚区（酒店/门票/火车票…先做 UI）
+底部 Tab 组件（先用 Link，可先不做高亮逻辑）
+当日完成：打开首页像「旅游 App」，路由空壳齐了。
 
-## Learn More
+周三 7/15 · 数据与列表（5h）
+上午
 
-To learn more about Next.js, take a look at the following resources:
+设计类型：City / Hotel / TripDay
+写 data/mock.ts（汕头、潮州、南澳几家假酒店就行）
+分清 Server Component 默认渲染 vs 何时加 "use client"
+下午
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+/hotels 列表页：卡片、价格、评分
+支持 URL 查询：/hotels?city=汕头（练 searchParams）
+首页搜索 → 跳列表
+当日完成：能搜城市并看到列表。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+周四 7/16 · 详情与动态路由（5h）
+上午
 
-## Deploy on Vercel
+动态路由：/hotels/[id]
+generateStaticParams 或直接按 id 查 mock（二选一，先简单）
+next/image 规范用法
+下午
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+酒店详情：头图、设施、房型假数据、底部「订」按钮
+列表 → 详情跳转
+空状态 / 找不到 id 的 not-found
+当日完成：完整「搜 → 列表 → 详情」链路。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+周五 7/17 · 交互与下单流（5h）
+上午
+
+日期选择、人数（Client 组件）
+理解受控表单；状态先放组件内，别急着上全局库
+下午
+
+/booking 或 /hotels/[id]/book：确认页（入住日、总价）
+「提交订单」→ 跳成功页（订单存 localStorage 即可）
+「我的」页读出本地订单列表
+当日完成：假下单闭环（不接支付）。
+
+周六 7/18 · 行程模块（贴合你刚玩的）（5h）
+上午
+
+行程数据结构：天、地点、交通、备注
+页面：/trips、/trips/[id]
+下午
+
+做一趟「汕头潮州南澳 3 日」示例行程（你真实路线可写进去）
+行程详情：按天时间线
+首页入口「我的行程」
+当日完成：旅游 App 里最有辨识度的一块出来了。
+
+周日 7/19 · API 与体验打磨（5h）
+上午
+
+app/api/hotels/route.ts：用 Route Handler 返回 JSON
+列表改为 fetch 自己的 API（体会服务端/客户端取数差异）
+下午
+
+Loading UI（loading.tsx）
+简单筛选：价格排序 / 仅看某城
+移动端宽度优先（模拟手机框）
+修样式、空状态、小 bug
+当日完成：像个能演示的作品，而不只是作业页。
+
+周一 7/20 · 收束与复盘（5h，可减量）
+上午
+
+npm run build，修类型错误
+写一页 README：功能列表、路由图、本周学到的 5 点
+下午
+
+选做 1 个加深：登录假墙 / 收藏酒店 / 火车票列表 UI
+或录 1 分钟操作演示给自己看
+当日完成：本周 MVP 封版。
+
+# 本周刻意练到的 Next.js 点
+概念	安排在哪天
+app 布局与嵌套路由
+二
+Server / Client 组件
+三–五
+searchParams
+三
+动态路由 [id]
+四
+客户端交互与表单
+五
+Route Handler
+日
+loading / not-found
+四、日
+图片与移动布局
+四、日
