@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { recommendList } from "../data/recommend";
-import ImgMoon from "../../public/moon.jpg";
 
+//推荐区
 export default function Recommend() {
   return (
     <div className="columns-2 gap-2">
@@ -13,7 +13,7 @@ export default function Recommend() {
             <div>
               <Image
                 className="inline-block mr-1 rounded-full"
-                src={ImgMoon}
+                src={item.authorSrc}
                 alt="pic"
                 width={10}
                 height={10}
