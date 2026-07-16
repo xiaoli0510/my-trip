@@ -11,21 +11,22 @@ import {
   Ticket,
   MountainSnow,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 //城市综合主页
 
-export default function Search() {
-  const [key, setKey] = useState("南澳岛");
+export default function CityPage() {
+  const searchParams = useSearchParams();
+  const city = searchParams.get('city') || '';
 
   const router = useRouter();
   const goBack = () => {
     router.back();
   };
 
-  const enterHotel = () => {
-    router.push('/hotel');
+  const enterHotels = () => {
+    router.push(`/hotels?city=${encodeURIComponent(city)}`);
   }
 
   return (
@@ -36,8 +37,8 @@ export default function Search() {
           <Bot className="text-theme inline-block flex-non" size={20} />
           <input
             className="flex-initial w-70 text-xs"
-            placeholder="汕头的酒店"
-            value={key}
+            placeholder="城市"
+            value={city}
             disabled
           />
         </div>
@@ -51,7 +52,7 @@ export default function Search() {
       </div>
       <div className="border-b border-gray-200 flex justify-around mt-4 mb-2 py-2">
         <div className="text-theme">
-          <span>上海</span>
+          <span>{city}</span>
           <Check size={16} className="inline-block"/>
         </div>
         <div>
@@ -61,7 +62,7 @@ export default function Search() {
       </div>
 
       <div className="flex justify-between">
-        <div className="rounded-md bg-blue-50/50 flex flex-row items-center px-1" onClick={enterHotel}>
+        <div className="rounded-md bg-blue-50/50 flex flex-row items-center px-1" onClick={enterHotels}>
           <Hotel size={16} />
           <span>酒店</span>
         </div>

@@ -3,12 +3,13 @@ import { Bot, MapPinned, ChevronLeft, CircleX } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function Search() {
+export default function SearchPage() {
   const router = useRouter();
-  const [key, setKey] = useState("南澳岛");
+  const [key, setKey] = useState("汕头");
 
-  const enterSearch = () => {
-    router.push("/city");
+  const enterHotels = () => {
+    router.push(`/city?city=${encodeURIComponent(key)}`
+    );
   };
 
   const goBack = () => {
@@ -35,7 +36,7 @@ export default function Search() {
         </div>
         <div
           className="flex-none bg-theme text-white rounded-2xl px-3 py-1"
-          onClick={enterSearch}
+          onClick={enterHotels}
         >
           搜索
         </div>

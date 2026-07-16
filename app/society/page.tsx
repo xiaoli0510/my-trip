@@ -1,4 +1,5 @@
-export default function Society(){
+export default function SocietyPage
+(){
     return (
         <div>Society</div>
     )

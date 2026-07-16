@@ -1,4 +1,4 @@
-export default function Message(){
+export default function MessagePage(){
     return (
         <div>message</div>
     )

@@ -1,4 +1,4 @@
-export default function My(){
+export default function MyPage(){
     return (
         <div>My</div>
     )
