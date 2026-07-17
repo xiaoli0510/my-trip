@@ -1,13 +1,19 @@
 import Link from "next/link";
-import { hotCityList } from "@/app/data/city";
+import { City } from "@/src/data/city";
 import { Bot, MapPinned, Search } from "lucide-react";
 
 // 热门搜索占位区
-export default function HotSearch() {
+export default async function HotSearch() {
+  const data = await fetch(`${process.env.BASEAPI_URI}/city`);
+  const hotCityList: City[] = await data.json();
+
   return (
     <div className="bg-blue-100/20 rounded-sm p-1 mb-2">
-      <div className=" flex justify-between">
-        <Link href="/search" className="border border-theme rounded-sm p-1 flex flex-auto w-[76%] justify-between flex-row">
+      <div className="flex justify-between">
+        <Link
+          href="/search"
+          className="border border-theme rounded-sm p-1 flex flex-auto w-[76%] justify-between flex-row"
+        >
           <div className="flex justify-self-start items-center align-middle">
             <Bot className="text-theme inline-block" />
             <span>搜索目的地/酒店/旅游/景点/交通</span>

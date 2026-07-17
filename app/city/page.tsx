@@ -3,7 +3,6 @@ import {
   Bot,
   MapPinned,
   ChevronLeft,
-  CircleX,
   Ellipsis,
   Check,
   Hotel,
@@ -12,7 +11,6 @@ import {
   MountainSnow,
 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
 
 //城市综合主页
 

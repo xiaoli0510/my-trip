@@ -1,11 +1,11 @@
-import Recommend from "@/app/home/Recommend";
+import RecommendList from "@/app/home/Recommend";
 import HotSearchPlaceholder from "./home/HotSearchPlaceholder";
 
 export default function Home() {
   return (
     <div>
       <HotSearchPlaceholder />
-      <Recommend />
+      <RecommendList />
     </div>
   );
 }
