@@ -55,7 +55,7 @@ export default function RoomCard({ item }: Props) {
           <div className="flex flex-row justify-end">
             <span className="line-through">¥{item.originPrice}</span>
             <span className="text-theme text-xl">
-              <span className="text-xl">{item.discountPrice}</span>起
+              <span className="text-xl">{item.discountPrice}</span>
             </span>
           </div>
           <div className="text-xs flex justify-end">
@@ -64,7 +64,7 @@ export default function RoomCard({ item }: Props) {
             ))}
           </div>
           <div className="flex justify-end gap-2 items-center align-middle">
-            <div className="border rounded-xs h-10 p-2">1间</div>
+            <div className="border rounded-xs h-10 p-2 font-bold">1间</div>
             <div className="bg-theme text-white p-2 h-10 rounded-xs">领券订</div>
           </div>
         </div>

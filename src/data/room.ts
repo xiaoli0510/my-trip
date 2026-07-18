@@ -28,4 +28,5 @@ export interface Room {
   minArea: number;
   maxArea: number;
   floor: number;
+  roomType:string[];
 }
