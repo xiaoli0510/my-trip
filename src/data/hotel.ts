@@ -18,5 +18,7 @@ export interface Hotel {
   discountPrice: number; // 折扣价
   img: StaticImageData; // 图片（可以是 URL 字符串，或导入的图片模块）
   continueGreat: number; // 连续好评天数,
-  facility:string[]
+  facility:string[],
+  distance:number,
+  address:string,
 }

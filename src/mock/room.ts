@@ -26,8 +26,10 @@ export const mockRoomList:{list:Room[]} = Mock.mock({
     cancelTime:'@time',
     bedCount:1,
     bedSize:1.5,
-    area:'15-20',
+    minArea:'@natural(10,20)',
+    maxArea:'@natural(21,25)',
     checkInPerson:2,
+    floor:'@natural',
     vipTag:['白银贵宾价','门店首单','4项优惠123']
   }],
 });

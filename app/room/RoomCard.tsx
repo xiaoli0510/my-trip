@@ -10,16 +10,17 @@ type Props = {
 export default function RoomCard({ item }: Props) {
   return (
     <Link
-      className="flex justify-between gap-2 mb-2"
+      className="flex justify-between gap-2 mb-2 bg-blue-50/40 p-2"
       key={item.id}
       href={`/hotelDetail/${item.id}`}
     >
       <div className="relative w-1/5 flex-none h-30">
         <Image
+        loading='lazy'
           src={item.img}
           alt={item.title}
-         width={100}
-         height={100}
+          width={100}
+          height={100}
           className="rounded-md"
         />
       </div>
@@ -28,41 +29,46 @@ export default function RoomCard({ item }: Props) {
           <span>{item.title}</span>
         </h3>
         <div className="flex flex-row justify-start gap-2 text-xs">
-         <span>1张1.5米大床</span>
-         <span>15-20㎡</span>
-         <span>2人入住</span>
-         <span>709层</span>
+          <span>
+            {item.bedCount}张{item.bedSize}米大床
+          </span>
+          <span>
+            {item.minArea}-{item.maxArea}㎡
+          </span>
+          <span>{item.checkInPerson}人入住</span>
+          <span>{item.floor}层</span>
         </div>
         <div className="flex flex-row justify-start gap-2 text-xs">
-         <span>无早餐</span>
-         <span className="text-theme">入住当前18:00前可免费取消</span>
+          <span>{item.hasBreakfast ? "有" : "无"}早餐</span>
+          <span className="text-theme">
+            入住当前{item.cancelTime}前可免费取消
+          </span>
         </div>
         <div className="text-xs flex justify-start gap-2">
           {item.tag.map((tag: string, i: number) => (
-            <span key={i} className="border">{tag}</span>
+            <span key={i} className="border px-1">
+              {tag}
+            </span>
           ))}
         </div>
         <div className="flex flex-col">
-          <div className="flex flex-col justify-end">
+          <div className="flex flex-row justify-end">
             <span className="line-through">¥{item.originPrice}</span>
-            <span className="text-theme text-3xl">
-              <span className="text-3xl">{item.discountPrice}</span>起
+            <span className="text-theme text-xl">
+              <span className="text-xl">{item.discountPrice}</span>起
             </span>
           </div>
           <div className="text-xs flex justify-end">
-            {
-                item.vipTag.map((i,index)=>(
-                    <span key={index}>{i}</span>
-                ))
-            }
+            {item.vipTag.map((i, index) => (
+              <span key={index} className="rounded-xs">{i}</span>
+            ))}
           </div>
-          <div className="flex justify-end gap-2">
-            <div className="border h-10">1间</div>
-            <div className="bg-theme text-white p-2 h-10">领券订</div>
+          <div className="flex justify-end gap-2 items-center align-middle">
+            <div className="border rounded-xs h-10 p-2">1间</div>
+            <div className="bg-theme text-white p-2 h-10 rounded-xs">领券订</div>
           </div>
         </div>
       </div>
     </Link>
   );
 }
-
