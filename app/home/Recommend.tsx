@@ -6,7 +6,7 @@ export default async function RecommendList() {
   let data = await fetch(process.env.BASEAPI_URI + "/recommend");
   let recommendList: Recommend[] = (await data.json()).list;
   return (
-    <div className="columns-2 gap-2">
+    <div className="columns-2 gap-2 px-2">
       {recommendList.map((item, index) => (
         <div className="w-full rounded-md mb-2" key={item.id}>
           <Image

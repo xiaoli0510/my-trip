@@ -30,11 +30,11 @@ export default async function HotSearch() {
       <div className="flex flex-row mt-2 justify-between">
         {hotCityList.map((item) => (
           <Link
-            href={`/city?city=${encodeURIComponent(item.name)}`}
+            href={`/city?city=${encodeURIComponent(item.place)}`}
             className="rounded-[10px] bg-white px-1"
             key={item.id}
           >
-            {item.name}
+            {item.place}
           </Link>
         ))}
       </div>

@@ -1,8 +1,7 @@
 import ImgPerson from "@/public/person.jpg";
 import { StaticImageData } from "next/image";
 
-// 定义 Hotel 的类型结构
-export interface Hotel {
+export interface Room {
   city: string;
   id: number; // 数字类型
   title: string; // 字符串
@@ -18,5 +17,12 @@ export interface Hotel {
   discountPrice: number; // 折扣价
   img: StaticImageData; // 图片（可以是 URL 字符串，或导入的图片模块）
   continueGreat: number; // 连续好评天数,
-  facility:string[]
+  facility:string[];
+    hasBreakfast:boolean,
+    cancelTime:string;
+    bedCount:number;
+    bedSize:number;
+    area:string;
+    checkInPerson:number;
+    vipTag:string[];
 }

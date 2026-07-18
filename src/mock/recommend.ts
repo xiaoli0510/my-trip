@@ -1,5 +1,7 @@
 import Mock from "mockjs";
-export const mockRecommendList = Mock.mock({
+import { Recommend } from "../data/recommend";
+
+export const mockRecommendList:{list:Recommend[]} = Mock.mock({
   "list|20": [
     {
       src: "https://picsum.photos/400/300?random=@id",
