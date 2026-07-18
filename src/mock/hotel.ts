@@ -1,7 +1,6 @@
-// mock/hotel.ts
 import Mock from 'mockjs';
 
-const pickItems = (source,min,max) => {
+const pickItems = (source:any[],min:number,max:number) => {
   return function(){
     const count = Mock.Random.integer(min,max);
     const shuffled = Mock.Random.shuffle(source);
