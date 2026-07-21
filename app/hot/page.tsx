@@ -13,7 +13,7 @@ export default async function HotPage({
   return (
     <div>
       这是热门城市{id}
-      {curCity?.name}
+      {curCity?.place}
     </div>
   );
 }

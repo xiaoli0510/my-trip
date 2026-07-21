@@ -15,6 +15,7 @@ import {
 import Image from "next/image";
 import RoomCard from "../../room/RoomCard";
 import { Room } from "@/src/data/room";
+import { notFound } from 'next/navigation'
 
 export default async function HotelDetailPage({
   params,
@@ -25,6 +26,8 @@ export default async function HotelDetailPage({
   const hotelList = (await data.json()).list;
   const { id } = await params;
   const curHotel = hotelList.find((item: Hotel) => item.id === Number(id));
+  console.log('11111111111',curHotel);
+  if(!curHotel) notFound();
   const roomData = await fetch(`${process.env.BASEAPI_URI}/room`);
   const roomList = (await roomData.json()).list;
   return (

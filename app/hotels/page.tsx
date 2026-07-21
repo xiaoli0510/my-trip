@@ -11,9 +11,7 @@ export default async function HotelPage({
   }>;
 }) {
   const data = await fetch(`${process.env.BASEAPI_URI}/hotel`)
-  console.log(1111111111,data)
   const hotelData = (await data.json()).list
-  console.log(22222,hotelData)
   const { city } = await searchParams;
   const list:Hotel[] = city
     ? hotelData.filter((item:Hotel) => item.city === city)
