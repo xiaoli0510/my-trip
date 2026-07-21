@@ -25,8 +25,7 @@ export default async function HotelDetailPage({
   const data = await fetch(`${process.env.BASEAPI_URI}/hotel`);
   const hotelList = (await data.json()).list;
   const { id } = await params;
-  const curHotel = hotelList.find((item: Hotel) => item.id === Number(id));
-  console.log('11111111111',curHotel);
+  const curHotel:Hotel = hotelList.find((item: Hotel) => item.id === Number(id));
   if(!curHotel) notFound();
   const roomData = await fetch(`${process.env.BASEAPI_URI}/room`);
   const roomList = (await roomData.json()).list;
