@@ -17,6 +17,7 @@ export const mockHotelList: { list: Hotel[] } = Mock.mock({
       title: "@ctitle(5, 10)", // 随机中文标题
       city: '@pick(["汕头", "潮州", "南澳"])',
       score: "@float(3.0, 5.0, 1, 1)", // 3.0~5.0 一位小数
+      mainComment:'@cword(3,10)',
       "level|3-5": 1, // 3~5 星级
       tag: ["拍照好看", "阳台", "美食"],
       near: pickItems(["万象城", "小公园"], 1, 3),

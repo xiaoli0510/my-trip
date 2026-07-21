@@ -15,18 +15,57 @@ import {
 import Image from "next/image";
 import RoomCard from "../../room/RoomCard";
 import { Room } from "@/src/data/room";
-import { notFound } from 'next/navigation'
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
+
+const cache = new Map<string, any>();
+
+//缓存数据，避免后续请求的数据不一致
+async function fetchHotelList() {
+  if (cache.has("hotelList")) return cache.get("hotelList");
+  const data = await fetch(`${process.env.BASEAPI_URI}/hotel`);
+  const list = (await data.json()).list;
+  cache.set("hotelList", list);
+  return list;
+}
+
+type Props = {
+  params: Promise<{ id: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const hotelList = await fetchHotelList();
+  const { id } = await params;
+  const curHotel: Hotel = hotelList.find(
+    (item: Hotel) => item.id === Number(id),
+  );
+  if (!curHotel) notFound();
+  return {
+    title: curHotel.title,
+    description: curHotel.mainComment,
+  };
+}
+
+export async function generateStaticParams() {
+  const hotelList = await fetchHotelList();
+  return hotelList.map((hotel: Hotel) => ({
+    id: String(hotel.id),
+  }));
+}
 
 export default async function HotelDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const data = await fetch(`${process.env.BASEAPI_URI}/hotel`);
-  const hotelList = (await data.json()).list;
+  const hotelList = await fetchHotelList();
+
   const { id } = await params;
-  const curHotel:Hotel = hotelList.find((item: Hotel) => item.id === Number(id));
-  if(!curHotel) notFound();
+  const curHotel: Hotel = hotelList.find(
+    (item: Hotel) => item.id === Number(id),
+  );
+  if (!curHotel) notFound();
+  console.log(1111111111, curHotel);
   const roomData = await fetch(`${process.env.BASEAPI_URI}/room`);
   const roomList = (await roomData.json()).list;
   return (
