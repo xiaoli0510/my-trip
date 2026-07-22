@@ -1,3 +1,4 @@
+import { mockHotelList } from "@/src/mock/hotel";
 import { Hotel } from "../../src/data/hotel";
 import HotelCard from "./hotelCard";
 import HotelHeader from "./hotelHeader";
@@ -10,8 +11,8 @@ export default async function HotelPage({
     city: string;
   }>;
 }) {
-  const data = await fetch(`${process.env.BASEAPI_URI}/hotel`)
-  const hotelData = (await data.json()).list
+  // const data = await fetch(`${process.env.BASEAPI_URI}/hotel`)
+  const hotelData = mockHotelList.list
   const { city } = await searchParams;
   const list:Hotel[] = city
     ? hotelData.filter((item:Hotel) => item.city === city)

@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { Recommend } from "../../src/data/recommend";
+import { mockRecommendList } from "@/src/mock/recommend";
 
 //推荐区
 export default async function RecommendList() {
-  let data = await fetch(process.env.BASEAPI_URI + "/recommend");
-  let recommendList: Recommend[] = (await data.json()).list;
+  // let data = await fetch(process.env.BASEAPI_URI + "/recommend");
+  let recommendList: Recommend[] = mockRecommendList.list;
   return (
     <div className="columns-2 gap-2 px-2">
       {recommendList.map((item, index) => (

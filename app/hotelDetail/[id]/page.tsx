@@ -17,26 +17,18 @@ import RoomCard from "../../room/RoomCard";
 import { Room } from "@/src/data/room";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { mockHotelList } from "@/src/mock/hotel";
+import { mockRoomList } from "@/src/mock/room";
 
-const cache = new Map<string, any>();
 
-//缓存数据，避免后续请求的数据不一致
-async function fetchHotelList() {
-  if (cache.has("hotelList")) return cache.get("hotelList");
-  const data = await fetch(`${process.env.BASEAPI_URI}/hotel`);
-  const list = (await data.json()).list;
-  cache.set("hotelList", list);
-  return list;
-}
 
 type Props = {
   params: Promise<{ id: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const hotelList = await fetchHotelList();
   const { id } = await params;
-  const curHotel: Hotel = hotelList.find(
+  const curHotel: Hotel | undefined = mockHotelList.list.find(
     (item: Hotel) => item.id === Number(id),
   );
   if (!curHotel) notFound();
@@ -47,8 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const hotelList = await fetchHotelList();
-  return hotelList.map((hotel: Hotel) => ({
+  return mockHotelList.list.map((hotel: Hotel) => ({
     id: String(hotel.id),
   }));
 }
@@ -58,16 +49,12 @@ export default async function HotelDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const hotelList = await fetchHotelList();
-
   const { id } = await params;
-  const curHotel: Hotel = hotelList.find(
+  const curHotel: Hotel | undefined = mockHotelList.list.find(
     (item: Hotel) => item.id === Number(id),
   );
   if (!curHotel) notFound();
-  console.log(1111111111, curHotel);
-  const roomData = await fetch(`${process.env.BASEAPI_URI}/room`);
-  const roomList = (await roomData.json()).list;
+  const roomList = mockRoomList.list;
   return (
     <div>
       <div className="w-full relative h-50 bg-white">
