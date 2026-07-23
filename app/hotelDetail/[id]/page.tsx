@@ -19,8 +19,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { mockHotelList } from "@/src/mock/hotel";
 import { mockRoomList } from "@/src/mock/room";
-
-
+import PersonRoomModal from "./PersonRoom";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -55,6 +54,9 @@ export default async function HotelDetailPage({
   );
   if (!curHotel) notFound();
   const roomList = mockRoomList.list;
+
+  //点击间数人数，显示弹框
+  const showPersonRoom = () => {};
   return (
     <div>
       <div className="w-full relative h-50 bg-white">
@@ -118,32 +120,24 @@ export default async function HotelDetailPage({
         </div>
       </div>
       <div className="flex justify-between">
-        <div className="flex-initial flex flex-col w-1/2 p-1">
-          <div className="flex justify-around text-gray-300 text-xs items-start">
-            <div className="flex-1">今天</div>
-            <div className="flex-1">明天</div>
-          </div>
-          <div className="text-xl flex justify-around items-start">
-            <div className="flex-1">7月18日</div>-
-            <div className="flex-1">7月19日</div>
-          </div>
-        </div>
-        <div className="w-2/5 flex-none flex justify-end text-xs align-bottom items-end  p-1">
-          <div className="px-1 border-r border-gray-200">共1晚</div>
-          <div>
-            <div className="text-right">间数人数</div>
-            <div className="flex font-bold gap-2">
-              <div className="flex justify-around gap-1">
-                1<TowelRack size={16} />
-              </div>
-              <div className="flex justify-around gap-1">
-                1<UserRound size={16} />
-              </div>
-              <div className="flex justify-around gap-1">
-                0<Baby size={16} />
-              </div>
+        <div className="flex-initial w-3/5 flex flex-row  items-end justify-between border-r-2 border-gray-200 px-2">
+          <div className="flex flex-col  p-1">
+            <div className="flex justify-around text-gray-300 text-xs items-start">
+              <div className="flex-1">今天</div>
+              <div className="flex-1">明天</div>
+            </div>
+            <div className="text-xl flex justify-around items-start">
+              <div className="flex-1">7月18日</div>-
+              <div className="flex-1">7月19日</div>
             </div>
           </div>
+          <div>共1晚</div>
+        </div>
+        <div
+          className="w-1/5 flex-none flex justify-end text-xs align-bottom items-end"
+        
+        >
+         <PersonRoomModal/>
         </div>
       </div>
       <div>
@@ -151,6 +145,7 @@ export default async function HotelDetailPage({
           <RoomCard item={room} key={room.id} />
         ))}
       </div>
+     
     </div>
   );
 }
