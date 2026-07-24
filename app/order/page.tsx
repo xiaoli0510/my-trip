@@ -4,10 +4,6 @@ import { useState } from "react";
 import {
   CircleMinus,
   CirclePlus,
-  Baby,
-  TowelRack,
-  UserRound,
-  X,
   CircleCheck,
   Circle,
   ShieldCheck,
@@ -16,47 +12,48 @@ import {
 interface RoomInfo {
   roomCount: number;
   name: string;
-  phone: number;
+  phone: string;
 }
 interface DiscountInfo {
-     promotion: number;
-    coupon: number;
-    integral: number;
+  promotion: number;
+  coupon: number;
+  integral: number;
 }
 
 export default function BookPage() {
-    //订房信息
-  const [info, setInfo] = useState({
+  //订房信息
+  const [info, setInfo] = useState<RoomInfo>({
     roomCount: 1,
-    name: '孙悟空',
-    phone: 12345678901,
+    name: "孙悟空",
+    phone: '12345678901',
   });
 
   //优惠信息
-  const [discount,setDiscount] = useState({
-    promotion:83,
-    coupon:50,
-    integral:148,
-  })
+  const [discount, setDiscount] = useState<DiscountInfo>({
+    promotion: 83,
+    coupon: 50,
+    integral: 148,
+  });
 
   //付款方式 0立即支付 1先住后付
-  const [payWay, setPayWay] = useState(0)
+  const [payWay, setPayWay] = useState(0);
   const onAdd = () => {
-    setInfo({
-      ...info,
-      roomCount: info.roomCount + 1,
-    });
+    setInfo((pre) => ({
+      ...pre,
+      roomCount: pre.roomCount + 1,
+    }))
   };
   const onMinus = () => {
-    setInfo({
-      ...info,
-      roomCount:  info.roomCount - 1,
-    });
+    if (info.roomCount === 1) return;
+   setInfo((pre) => ({
+      ...pre,
+      roomCount: pre.roomCount - 1,
+    }))
   };
-  
+
   const onSureBook = () => {
-    console.log('提交订单成功了');
-  }
+    console.log("提交订单成功了");
+  };
   return (
     <div className="p-2 bg-green-50/20">
       {/* 房间信息 */}
@@ -66,15 +63,11 @@ export default function BookPage() {
           <div className="flex gap-2">
             <CircleMinus
               size={16}
-              color={info.roomCount > 0 ? "#0086f6" : "#ddd"}
+              color={info.roomCount > 1 ? "#0086f6" : "#ddd"}
               onClick={() => onMinus()}
             />
-            <span>{info.roomCount}</span>
-            <CirclePlus
-              size={16}
-              color="#0086f6"
-              onClick={() => onAdd()}
-            />
+            <span>{info.roomCount}间</span>
+            <CirclePlus size={16} color="#0086f6" onClick={() => onAdd()} />
           </div>
         </div>
         <div className="flex flex-row justify-between">
@@ -92,7 +85,9 @@ export default function BookPage() {
           <div className="font-bold text-xl">本单可享</div>
           <div className="flex gap-2">
             <span>已享最大优惠</span>
-            <span className="text-orange-300">¥{discount.promotion + discount.coupon}</span>
+            <span className="text-orange-300">
+              ¥{discount.promotion + discount.coupon}
+            </span>
           </div>
         </div>
         <div className="flex flex-row justify-between">
@@ -106,7 +101,7 @@ export default function BookPage() {
           <div>优惠券</div>
           <div>
             <span>折扣券</span>
-            <span className="text-orange-300">减少¥23{discount.coupon}</span>
+            <span className="text-orange-300">减少 ¥{discount.coupon}</span>
           </div>
         </div>
         <div className="flex flex-row justify-between">
@@ -121,13 +116,27 @@ export default function BookPage() {
         <div className="flex flex-row justify-between">
           <div className="font-bold text-xl">支付方式</div>
         </div>
-        <div className="bg-gray-100/30 px-2 py-3 flex justify-between my-1 rounded-md" onClick={() => setPayWay(0)}>
+        <div
+          className="bg-gray-100/30 px-2 py-3 flex justify-between my-1 rounded-md"
+          onClick={() => setPayWay(0)}
+        >
           <div>立即支付</div>
-          {payWay===0?<CircleCheck color="#0086f6" size={16} />:<Circle color="#0086f6" size={16} />}
+          {payWay === 0 ? (
+            <CircleCheck color="#0086f6" size={16} />
+          ) : (
+            <Circle color="#0086f6" size={16} />
+          )}
         </div>
-        <div className="bg-gray-100/30 px-2 py-3 flex justify-between my-1 rounded-md" onClick={() => setPayWay(1)}>
+        <div
+          className="bg-gray-100/30 px-2 py-3 flex justify-between my-1 rounded-md"
+          onClick={() => setPayWay(1)}
+        >
           <div>先住后付</div>
-          {payWay===1?<CircleCheck color="#0086f6" size={16} />:<Circle color="#0086f6" size={16} />}
+          {payWay === 1 ? (
+            <CircleCheck color="#0086f6" size={16} />
+          ) : (
+            <Circle color="#0086f6" size={16} />
+          )}
         </div>
       </div>
       <div className="flex justify-start gap-2">
@@ -148,7 +157,10 @@ export default function BookPage() {
             </span>
             <span className="text-theme">查看明细</span>
           </div>
-          <div className="bg-theme text-white px-4 py-2 rounded-md" onClick={() => onSureBook()}>
+          <div
+            className="bg-theme text-white px-4 py-2 rounded-md"
+            onClick={() => onSureBook()}
+          >
             立即支付
           </div>
         </div>
