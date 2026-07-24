@@ -19,7 +19,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { mockHotelList } from "@/src/mock/hotel";
 import { mockRoomList } from "@/src/mock/room";
-import PersonRoomModal from "./PersonRoom";
+import PersonRoomModal from "./PersonRoomModal";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -54,9 +54,6 @@ export default async function HotelDetailPage({
   );
   if (!curHotel) notFound();
   const roomList = mockRoomList.list;
-
-  //点击间数人数，显示弹框
-  const showPersonRoom = () => {};
   return (
     <div>
       <div className="w-full relative h-50 bg-white">

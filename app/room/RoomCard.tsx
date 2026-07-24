@@ -1,7 +1,7 @@
-import { Gem } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Room } from "@/src/data/room";
+import RoomCardBottom from "./RoomCardBottom";
 
 type Props = {
   item: Room;
@@ -63,10 +63,7 @@ export default function RoomCard({ item }: Props) {
               <span key={index} className="rounded-xs">{i}</span>
             ))}
           </div>
-          <div className="flex justify-end gap-2 items-center align-middle">
-            <div className="border rounded-xs h-10 p-2 font-bold">1间</div>
-            <div className="bg-theme text-white p-2 h-10 rounded-xs">领券订</div>
-          </div>
+         <RoomCardBottom/>
         </div>
       </div>
     </Link>
