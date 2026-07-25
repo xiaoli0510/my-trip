@@ -4,7 +4,6 @@ export default async function RoomPage({
   params: Promise<{ id: string[] }>;
 }) {
   const { id } = await params;
-  console.log(id);
   return (
     <div>
       <div>这是room</div>

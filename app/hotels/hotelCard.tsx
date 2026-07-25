@@ -14,7 +14,6 @@ export default function HotelCard({ item }: Props) {
       className="flex justify-between gap-2 mb-2"
       href={`/hotelDetail/${item.id}`}
     >
-      <div>id:{item.id}</div>
       <div className="relative w-1/5 flex-none h-30">
         <Image
           src={item.img}

@@ -64,7 +64,7 @@ export default function RoomCard({ item,hotelId }: Props) {
               <span key={index} className="rounded-xs">{i}</span>
             ))}
           </div>
-         <RoomCardBottom item={item}/>
+         <RoomCardBottom item={item} hotelId={hotelId}/>
         </div>
       </div>
     </Link>
