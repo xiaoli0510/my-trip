@@ -8,6 +8,7 @@ import {
   Circle,
   ShieldCheck,
 } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 interface RoomInfo {
   roomCount: number;
@@ -21,11 +22,13 @@ interface DiscountInfo {
 }
 
 export default function BookPage() {
+  const searchParams = useSearchParams();
+  const discountPrice = searchParams.get("discountPrice");
   //订房信息
   const [info, setInfo] = useState<RoomInfo>({
     roomCount: 1,
     name: "孙悟空",
-    phone: '12345678901',
+    phone: "12345678901",
   });
 
   //优惠信息
@@ -37,21 +40,25 @@ export default function BookPage() {
 
   //付款方式 0立即支付 1先住后付
   const [payWay, setPayWay] = useState(0);
+
+  //是否阅读协议
+  const [hasRead, setHasRead] = useState(false);
   const onAdd = () => {
     setInfo((pre) => ({
       ...pre,
       roomCount: pre.roomCount + 1,
-    }))
+    }));
   };
   const onMinus = () => {
     if (info.roomCount === 1) return;
-   setInfo((pre) => ({
+    setInfo((pre) => ({
       ...pre,
       roomCount: pre.roomCount - 1,
-    }))
+    }));
   };
 
   const onSureBook = () => {
+    if(!hasRead) return;
     console.log("提交订单成功了");
   };
   return (
@@ -139,8 +146,15 @@ export default function BookPage() {
           )}
         </div>
       </div>
-      <div className="flex justify-start gap-2">
-        <Circle color="#0086f6" size={16} />
+      <div
+        className="flex justify-start gap-2"
+        onClick={() => setHasRead(!hasRead)}
+      >
+        {hasRead ? (
+          <CircleCheck color="#0086f6" size={16} />
+        ) : (
+          <Circle color="#0086f6" size={16} />
+        )}
         <span>我已阅读并同意程信分服务协议</span>
       </div>
 
@@ -153,7 +167,7 @@ export default function BookPage() {
           <div>
             <span>在线付</span>
             <span className="text-theme">
-              ¥ <span className="text-2xl">246</span>
+              ¥ <span className="text-2xl">{discountPrice}</span>
             </span>
             <span className="text-theme">查看明细</span>
           </div>

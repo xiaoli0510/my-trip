@@ -1,3 +1,4 @@
+'use client'
 import { Gem } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,16 +12,16 @@ export default function HotelCard({ item }: Props) {
   return (
     <Link
       className="flex justify-between gap-2 mb-2"
-      key={item.id}
       href={`/hotelDetail/${item.id}`}
     >
+      <div>id:{item.id}</div>
       <div className="relative w-1/5 flex-none h-30">
         <Image
           src={item.img}
           alt={item.title}
           fill // ✅ 填充父容器
-          objectFit="cover" // ✅ 覆盖
-          className="rounded-md"
+           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="rounded-md object-cover"
         />
       </div>
       <div className="flex-auto">

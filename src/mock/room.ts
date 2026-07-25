@@ -1,5 +1,7 @@
 import Mock from 'mockjs';
 import {  Room } from '../data/room';
+import ImgPerson from '@/public/person.jpg'
+
 
 const pickItems = (source:any[],min:number,max:number) => {
   return function(){
@@ -11,7 +13,7 @@ const pickItems = (source:any[],min:number,max:number) => {
 
 export const mockRoomList:{list:Room[]} = Mock.mock({
   'list|4': [{      
-      img: 'https://picsum.photos/seed/hotel@id/400/300',  // 用 @id 等随机值让每次请求不同                    // 生成 20 条
+      img: ImgPerson,  // 用 @id 等随机值让每次请求不同                    // 生成 20 条
     'id|+1': 1,
     title: '@ctitle(5, 10)',              // 随机中文标题
     city: '@pick(["汕头", "潮州", "南澳"])',

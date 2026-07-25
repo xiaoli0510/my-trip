@@ -4,15 +4,16 @@ import { Room } from "@/src/data/room";
 import RoomCardBottom from "./RoomCardBottom";
 
 type Props = {
-  item: Room;
+  item: Room; //房间item
+  hotelId: number;//酒店id
 };
 
-export default function RoomCard({ item }: Props) {
+export default function RoomCard({ item,hotelId }: Props) {
   return (
     <Link
       className="flex justify-between gap-2 mb-2 bg-blue-50/40 p-2"
       key={item.id}
-      href={`/hotelDetail/${item.id}`}
+      href={`/room/${item.id}/${hotelId}`}
     >
       <div className="relative w-1/5 flex-none h-30">
         <Image
@@ -63,7 +64,7 @@ export default function RoomCard({ item }: Props) {
               <span key={index} className="rounded-xs">{i}</span>
             ))}
           </div>
-         <RoomCardBottom/>
+         <RoomCardBottom item={item}/>
         </div>
       </div>
     </Link>

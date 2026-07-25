@@ -1,14 +1,18 @@
 
 
 'use client';
+import { Room } from "@/src/data/room";
 import { useRouter } from "next/navigation";
 
-export default function RoomCardBottom(){
+interface Props {
+    item: Room
+}
+export default function RoomCardBottom({item}:Props){
     const router = useRouter();
     const onOrder = (e:React.MouseEvent) => {
         e.stopPropagation();
         e.preventDefault();
-        router.push('/order');
+        router.push(`/order?discountPrice=${encodeURIComponent(item.discountPrice)}`);
     }
     return (
          <div className="flex justify-end gap-2 items-center align-middle">
