@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   CircleCheck,
   Circle,
@@ -12,7 +12,7 @@ import PaymentSection from "./PaymentSection";
 import OrderBottom from "./OrderBottom";
 
 //房间+支付方式+协议 client 组件
-export default function RoomPayment() {
+export default function RoomPayment({children}:{children:React.ReactNode}) {
   const searchParams = useSearchParams();
   const discountPrice = searchParams.get("discountPrice") || '';
   const hotelId = searchParams.get("hotelId");
@@ -96,6 +96,9 @@ export default function RoomPayment() {
         onAdd = {onAdd}
         onMinus={onMinus}
       />
+
+      {/* 优惠 */}
+      {children}
 
       {/* 支付方式 */}
       <PaymentSection payWay={payWay} setPayWay={setPayWay} />

@@ -5,7 +5,6 @@ export interface DiscountInfo {
   integral: number;
 }
 export default async function DiscountSection(){
-  console.log(`${process.env.NEXT_PUBLIC_BASEAPI_URI}/discount`)
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASEAPI_URI}/discount`,{
      method: "POST", 
       headers: {

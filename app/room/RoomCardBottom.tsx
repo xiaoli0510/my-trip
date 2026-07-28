@@ -13,7 +13,6 @@ export default function RoomCardBottom({item,hotelId}:Props){
     const onOrder = (e:React.MouseEvent) => {
         e.stopPropagation();
         e.preventDefault();
-        console.log(`/order?discountPrice=${encodeURIComponent(item.discountPrice)}&roomId=${item.id}&hotelId=${hotelId}`);
         router.push(`/order?discountPrice=${encodeURIComponent(item.discountPrice)}&roomId=${item.id}&hotelId=${hotelId}`);
     }
     return (

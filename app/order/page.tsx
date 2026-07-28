@@ -1,7 +1,7 @@
 
 import { Metadata } from "next";
 import DiscountSection, { DiscountInfo } from "./DiscountSection";
-import RoomPayment from "./RoomPayment";
+import OrderContent from "./OrderContent";
 
 interface Props {
   searchParams:{
@@ -30,10 +30,10 @@ export default function BookPage() {
   };
   return (
     <div className="p-2 bg-green-50/20">
-      {/* 优惠信息 service  组件 */}
-      <DiscountSection/>
-      {/* 房间和支付 client组件 */}
-      <RoomPayment />
+       {/* service component通过prop传递给 client component */}
+      <OrderContent>
+        <DiscountSection/>
+      </OrderContent>
     </div>
   );
 }
