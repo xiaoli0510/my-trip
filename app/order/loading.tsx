@@ -1,8 +1,8 @@
 export default function orderLoading() {
   return (
-    <div>
+    <div className="bg-white">
       {/* 房间信息 */}
-      <div className="rounded-xl bg-white my-4 p-4 flex flex-col gap-2">
+      <div className="rounded-xl bg-green-50/20 my-4 p-4 flex flex-col gap-2">
         {Array.from({ length: 3 }).map(() => (
           <div className="flex flex-row justify-between h-10">
             <div className="w-1/3"></div>
@@ -11,7 +11,7 @@ export default function orderLoading() {
         ))}
       </div>
       {/* 优惠 */}
-      <div className="rounded-xl bg-white my-4 p-4 flex flex-col gap-2">
+      <div className="rounded-xl bg-green-50/20 my-4 p-4 flex flex-col gap-2">
         {Array.from({ length: 3 }).map(() => (
           <div className="flex flex-row justify-between h-10">
             <div className="w-1/3"></div>
@@ -20,7 +20,7 @@ export default function orderLoading() {
         ))}
       </div>
       {/* 支付方式 */}
-      <div className="rounded-xl bg-white my-4 p-4  flex flex-col gap-2">
+      <div className="rounded-xl bg-green-50/20 my-4 p-4  flex flex-col gap-2">
         <div className="flex flex-row justify-between">
           <div className="font-bold text-xl">支付方式</div>
         </div>

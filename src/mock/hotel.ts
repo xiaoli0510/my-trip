@@ -11,7 +11,7 @@ const pickItems = (source: any[], min: number, max: number) => {
 };
 
 export const mockHotelList: { list: Hotel[] } = Mock.mock({
-  "list|20": [
+  "list|4-5": [
     {
       img: ImgBeach, // 用 @id 等随机值让每次请求不同                    // 生成 20 条
       "id|+1": 1,

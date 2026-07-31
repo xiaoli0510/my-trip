@@ -20,13 +20,7 @@ import { Metadata } from "next";
 import { mockHotelList } from "@/src/mock/hotel";
 import { mockRoomList } from "@/src/mock/room";
 import PersonRoomModal from "./PersonRoomModal";
-
-// 暂时直接在 page.tsx 中定义静态数据代替 import
-const tempHotelList = [
-  { id: 1, title: "测试酒店1", score: "4.5", mainComment: "很好", commentCount: 100, subComment: "不错", distance: 500, address: "汕头", facility: ["免费停车"], img: "https://picsum.photos/400/300", level: 4 },
-  { id: 2, title: "测试酒店2", score: "4.0", mainComment: "好", commentCount: 200, subComment: "还行", distance: 300, address: "潮州", facility: ["免费停车"], img: "https://picsum.photos/400/300", level: 3 },
-  { id: 3, title: "测试酒店3", score: "4.8", mainComment: "非常好", commentCount: 300, subComment: "很棒", distance: 100, address: "南澳", facility: ["免费停车"], img: "https://picsum.photos/400/300", level: 5 },
-];
+import HotelDetailTop from "./HotelDetailTop";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -66,25 +60,7 @@ export default async function HotelDetailPage({
     <div>
        <div className="w-full relative h-50 bg-white">
         <Image src={curHotel.img} alt={curHotel.title} fill />
-        <div className="flex justify-between absolute top-5 w-full p-1 border bg-black/20 backdrop-blur-sm">
-          <div className="bg-black/20 backdrop-blur-sm rounded-full p-1">
-            <ArrowLeft color="white" size={16} />
-          </div>
-          <div className="flex justify-start gap-2">
-            <div className="bg-black/30 backdrop-blur-sm rounded-full p-1">
-              <Heart color="white" size={16} />
-            </div>
-            <div className="bg-black/30 backdrop-blur-sm rounded-full p-1">
-              <SquareArrowOutUpRight color="white" size={16} />
-            </div>
-            <div className="bg-black/30 backdrop-blur-sm rounded-full p-1">
-              <ShoppingCart color="white" size={16} />
-            </div>
-            <div className="bg-black/30 backdrop-blur-sm rounded-full p-1">
-              <Ellipsis color="white" size={16} />
-            </div>
-          </div>
-        </div>
+       <HotelDetailTop hotelId={curHotel.id}/>
       </div>
       <div className="my-2 p-1">
         <div className="flex justify-start">
