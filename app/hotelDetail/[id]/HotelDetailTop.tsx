@@ -70,7 +70,7 @@ export default function HotelDetailTop({ hotelId }: { hotelId: number }) {
 
   //进入收藏列表页
   const enterCollect = () => {
-    router.push('/collect');
+    router.push('/collect?type=1');
   };
   return (
     <div className="flex justify-between absolute top-5 w-full p-1 border bg-black/20 backdrop-blur-sm">
