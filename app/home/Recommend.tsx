@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Recommend } from "../../src/data/recommend";
 import { mockRecommendList } from "@/src/mock/recommend";
+import Link from "next/link";
 
 //推荐区
 export default async function RecommendList() {
@@ -9,7 +10,7 @@ export default async function RecommendList() {
   return (
     <div className="columns-2 gap-2 px-2">
       {recommendList.map((item, index) => (
-        <div className="w-full rounded-md mb-2" key={item.id}>
+        <Link className="inline-block w-full rounded-md mb-2" key={item.id} href={`/home/recommendDetail/${item.id}`}>
           <Image
             src={item.src}
             alt={item.title}
@@ -33,7 +34,7 @@ export default async function RecommendList() {
             </div>
             <div>{item.likes}</div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
