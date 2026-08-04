@@ -10,12 +10,16 @@ export default function RecommendDetail() {
   const imageList = [ImgBeach, ImgPerson, ImgBeach, ImgPerson];
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  let timer = null;
+  //触摸相关
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+  const touchEndX = useRef(0);
+  const touchEndY = useRef(0);
 
   useEffect(() => {
-    timerRef.current = setInterval(() => {
-      setActiveIndex((pre) => (pre + 1) % imageList.length);
-    }, 3000);
+    // timerRef.current = setInterval(() => {
+    //   setActiveIndex((pre) => (pre + 1) % imageList.length);
+    // }, 3000);
 
     return () => {
       if (timerRef.current) {
@@ -23,17 +27,37 @@ export default function RecommendDetail() {
       }
     };
   }, [imageList.length]);
+
+  const onTouchStart = (e:React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStartX.current = touch.clientX;
+    touchStartY.current = touch.clientY;
+  }
+
+  const onTouchMove = (e:React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchEndX.current = touch.clientX;
+    touchEndY.current = touch.clientY;
+  }
+
+  const onTouchEnd = () => {
+    
+  }
   return (
     <div>
       这里是一个轮播图
       <div className="section-slider">
-        <div className="flex w-full overflow-hidden relative">
+        <div className="flex w-full overflow-hidden relative"
+         onTouchStart={(e) => onTouchStart(e)}
+         onTouchMove={(e) => onTouchMove(e)}
+         onTouchEnd={(e) => onTouchEnd(e)}
+         >
           {imageList.map((img, index) => (
             <Image
               key={index}
               src={img}
               alt="hotelImg"
-              className={activeIndex === index ? "w-full" : "w-full hidden"}
+              className={activeIndex === index ? "w-full h-[75]" : "w-full h-[75] hidden"}
             />
           ))}
         </div>
