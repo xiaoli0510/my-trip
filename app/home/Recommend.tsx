@@ -10,7 +10,7 @@ export default async function RecommendList() {
   return (
     <div className="columns-2 gap-2 px-2">
       {recommendList.map((item, index) => (
-        <Link className="inline-block w-full rounded-md mb-2" key={item.id} href={`/home/recommendDetail/${item.id}`}>
+        <Link className="inline-block w-full rounded-md mb-2" key={item.id + item.title} href={`/home/recommendDetail/${item.id}`}>
           <Image
             src={item.src}
             alt={item.title}

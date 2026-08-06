@@ -4,6 +4,8 @@ import ImgBeach from "@/public/beach.jpg";
 import ImgPerson from "@/public/person.jpg";
 import { Cat, Dog, Smile, ThumbsUp } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import CommentCard from "./CommentCard";
+import { Comment } from "@/src/data/comment";
 
 export default function RecommendDetail() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -15,8 +17,20 @@ export default function RecommendDetail() {
   const touchStartY = useRef(0);
   const touchEndX = useRef(0);
   const touchEndY = useRef(0);
+  const isSwiping = useRef(false);
 
+  const [commentList,setCommentList] = useState<Comment[]>([])
   useEffect(() => {
+    const fetchData =async () => {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASEAPI_URI}/comment`,{
+        method:'POST',
+        body:JSON.stringify({id:1})
+      });
+      const jsonData = (await res.json());
+      setCommentList(jsonData.body.list)
+    }
+
+    fetchData();
     // timerRef.current = setInterval(() => {
     //   setActiveIndex((pre) => (pre + 1) % imageList.length);
     // }, 3000);
@@ -32,32 +46,48 @@ export default function RecommendDetail() {
     const touch = e.touches[0];
     touchStartX.current = touch.clientX;
     touchStartY.current = touch.clientY;
+    isSwiping.current = true;
   }
 
   const onTouchMove = (e:React.TouchEvent) => {
+    if(!isSwiping.current) return;
     const touch = e.touches[0];
     touchEndX.current = touch.clientX;
     touchEndY.current = touch.clientY;
   }
 
   const onTouchEnd = () => {
-    
+    if(!isSwiping.current) return;
+    isSwiping.current = false;
+    const deltaX = touchEndX.current - touchStartX.current;
+    const deltaY = touchEndY.current - touchStartY.current;
+
+    if(Math.abs(deltaX) > Math.abs(deltaY)){
+        //是水平方向的滑动
+        if(deltaX < -50){
+            //向左边滑动
+            setActiveIndex((prev) =>  (prev + 1) % imageList.length);
+        }else if(deltaX > 50){
+            //向右边滑动
+            setActiveIndex((prev) => (prev - 1) % imageList.length);
+        }
+    }
+
   }
   return (
     <div>
-      这里是一个轮播图
       <div className="section-slider">
         <div className="flex w-full overflow-hidden relative"
-         onTouchStart={(e) => onTouchStart(e)}
-         onTouchMove={(e) => onTouchMove(e)}
-         onTouchEnd={(e) => onTouchEnd(e)}
+         onTouchStart={onTouchStart}
+         onTouchMove={onTouchMove}
+         onTouchEnd={onTouchEnd}
          >
           {imageList.map((img, index) => (
             <Image
               key={index}
               src={img}
               alt="hotelImg"
-              className={activeIndex === index ? "w-full h-[75]" : "w-full h-[75] hidden"}
+              className={activeIndex === index ? "w-full h-[100]" : "w-full h-[100] hidden"}
             />
           ))}
         </div>
@@ -101,24 +131,11 @@ export default function RecommendDetail() {
         </div>
 
         <div className="comment-list">
-          <div className="comment-item flex">
-            <Image
-              src={ImgPerson}
-              alt="User"
-              className="flex-none rounded-full w-8 h-8 inline-block"
-              width={32}
-              height={32}
-            />
-            <div className="ml-2 flex-1">
-              <div className="text-xs text-gray-400">我是猴子</div>
-              <div>这是评级的文字内容</div>
-              <div className="text-xs text-gray-400">2023-10-10 广东 回复</div>
-            </div>
-            <div className="flex-none w-10 items-center flex flex-col">
-              <ThumbsUp size={16} />
-              <span>首赞</span>
-            </div>
-          </div>
+          {
+            commentList.map(item => (
+              <CommentCard item={item} key={item.id}/>
+            ))
+          }
         </div>
       </div>
     </div>

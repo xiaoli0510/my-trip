@@ -7,10 +7,10 @@ export default function BottomNav() {
   const pathname = usePathname();
   const BOTTOM_TABS = [
     { id: 0, name: "首页", path: "/", icon: House },
-    { id: 0, name: "消息", path: "/message", icon: Mail },
-    { id: 0, name: "社区", path: "/society", icon: Earth },
-    { id: 0, name: "行程", path: "/trip", icon: House },
-    { id: 0, name: "我的", path: "/my", icon: UserRoundArrowLeft },
+    { id: 1, name: "消息", path: "/message", icon: Mail },
+    { id: 2, name: "社区", path: "/society", icon: Earth },
+    { id: 3, name: "行程", path: "/trip", icon: House },
+    { id: 4, name: "我的", path: "/my", icon: UserRoundArrowLeft },
   ];
 
   const showBottomNav = BOTTOM_TABS.some((tab) => tab.path === pathname);
