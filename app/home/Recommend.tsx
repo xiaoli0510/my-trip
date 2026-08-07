@@ -3,10 +3,14 @@ import { Recommend } from "../../src/data/recommend";
 import { mockRecommendList } from "@/src/mock/recommend";
 import Link from "next/link";
 
+const fetchData =async () => {
+  await new Promise((resolve) => setTimeout(resolve,500) );
+  return mockRecommendList.list;
+}
 //推荐区
 export default async function RecommendList() {
   // let data = await fetch(process.env.BASEAPI_URI + "/recommend");
-  let recommendList: Recommend[] = mockRecommendList.list;
+  let recommendList: Recommend[] = await fetchData();
   return (
     <div className="columns-2 gap-2 px-2">
       {recommendList.map((item, index) => (

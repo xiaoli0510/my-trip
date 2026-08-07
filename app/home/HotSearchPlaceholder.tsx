@@ -3,10 +3,14 @@ import { City } from "@/src/data/city";
 import { Bot, MapPinned, Search } from "lucide-react";
 import { mockHotCityList } from "@/src/mock/city";
 
+const fetchData = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  return mockHotCityList.list;
+};
+
 // 热门搜索占位区
 export default async function HotSearch() {
-  // const data = await fetch(`${process.env.BASEAPI_URI}/city`);
-  const hotCityList: City[] = mockHotCityList.list;
+  const hotCityList: City[] = await fetchData();
 
   return (
     <div className="bg-blue-100/20 rounded-sm p-1 mb-2">
